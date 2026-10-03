@@ -103,7 +103,7 @@
     }
   }
 
-  function requestSheets(action, values = {}, endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "") {
+  function requestSheets(action, values = {}, endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "https://script.google.com/macros/s/AKfycbx6otsqYR97K0Xpe5Gye9y0OBmOQPkx-GZe-B8TZng/dev") {
     return new Promise((resolve, reject) => {
       if (!isAppsScriptUrl(endpoint)) {
         reject(new Error("Paste a valid deployed Google Apps Script web app URL ending in /exec."));
@@ -299,7 +299,7 @@
     event.preventDefault();
     const name = $("#account-name").value.trim();
     const pin = $("#account-pin").value;
-    const endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "";
+    const endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "https://script.google.com/macros/s/AKfycbx6otsqYR97K0Xpe5Gye9y0OBmOQPkx-GZe-B8TZng/dev";
     const errorBox = $("#account-error");
     const submit = $("#account-submit");
     if (name.length < 2 || name.length > 24) {
