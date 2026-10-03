@@ -182,6 +182,7 @@
       <p id="account-subtitle">Sign in to save your learning progress to Google Sheets.</p>
       <form id="account-form">
         <label>Student name<input id="account-name" type="text" maxlength="24" autocomplete="username" required></label>
+        <label id="account-class-label" class="hidden">Class<select id="account-class"></select></label>
         <label>4-digit PIN<input id="account-pin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="current-password" required></label>
         <p class="account-error" id="account-error" role="alert"></p>
         <button class="btn btn-primary account-submit" id="account-submit" type="submit">Sign in securely <span>→</span></button>

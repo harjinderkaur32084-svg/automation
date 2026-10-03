@@ -271,6 +271,8 @@
     $("#account-submit").innerHTML = mode === "signup" ? "Create account <span>→</span>" : "Sign in securely <span>→</span>";
     $("#account-pin").value = "";
     $("#account-pin").autocomplete = mode === "signup" ? "new-password" : "current-password";
+    const classLabel = $("#account-class-label");
+    if (classLabel) classLabel.classList.toggle("hidden", mode !== "signup");
     $("#account-close").classList.toggle("hidden", authRequired);
     document.body.classList.toggle("auth-required", authRequired);
     $("#account-backdrop").classList.remove("hidden");
@@ -318,6 +320,8 @@
       let result;
       if (authMode === "signup") {
         student.name = name;
+        const selectedClass = Number($("#account-class")?.value);
+        if (selectedClass) student.classNumber = selectedClass;
         result = await requestSheets("signup", { name, pin, classNumber: student.classNumber, progress: student }, endpoint);
       } else {
         result = await requestSheets("login", { name, pin }, endpoint);
@@ -983,6 +987,7 @@
   function initialize() {
     makeClassOptions($("#class-select"));
     makeClassOptions($("#parent-class-select"));
+    makeClassOptions($("#account-class"));
     if (student.theme === "dark") document.body.classList.add("dark");
     applyLanguage();
     renderAll();
@@ -1093,6 +1098,7 @@
         document.body.classList.remove("dark");
         makeClassOptions($("#class-select"));
         makeClassOptions($("#parent-class-select"));
+        makeClassOptions($("#account-class"));
         applyLanguage();
         renderAll();
         save();
