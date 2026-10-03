@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8ff">
+  <meta name="description" content="A playful place to learn, practise and master multiplication tables from 1 to 100.">
+  <title>Table Master – Learn Maths Easily</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="home" aria-label="Table Master home">
+        <span class="brand-mark">×</span>
+        <span class="brand-copy">table<span>master</span><small>Maths made magical</small></span>
+      </a>
+      <div class="side-label">YOUR CLASSROOM</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="home"><span>⌂</span> Home</button>
+        <button class="nav-link" data-page="learn"><span>▦</span> Learn tables</button>
+        <button class="nav-link" data-page="games"><span>♙</span> Maths games</button>
+        <button class="nav-link" data-page="quiz"><span>✎</span> Quick quiz</button>
+        <button class="nav-link" data-page="magic"><span>✧</span> Magic tricks</button>
+        <button class="nav-link" data-page="dashboard"><span>◷</span> My progress</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="streak-card"><span class="streak-icon">🔥</span><div><strong id="side-streak">0 day streak</strong><small>Little steps add up!</small></div></div>
+        <button class="nav-link" data-page="parent"><span>♡</span> Parent view</button>
+        <div class="side-footer">Made for curious minds <span>✦</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu icon-button" id="menu-toggle" aria-label="Open menu">☰</button>
+        <div class="breadcrumbs">My classroom <span>/</span> <b id="page-crumb">Home</b></div>
+        <div class="top-actions">
+          <button id="account-button" class="top-pill account-pill">Sign in</button>
+          <button id="language-toggle" class="top-pill" title="Switch language">🇬🇧 <span>EN</span></button>
+          <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode" title="Toggle dark mode">☾</button>
+          <button class="profile-pill" id="profile-button"><span class="avatar" id="top-avatar">S</span><span id="top-name">Student</span><span class="chevron">⌄</span></button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page active" id="page-home">
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="sparkle">✦</span> YOUR MATHS ADVENTURE STARTS HERE</div>
+              <h1 id="welcome-title">Hey, superstar!<br><span>Ready to shine?</span></h1>
+              <p>Big maths skills start with little steps. Let’s make those tables stick!</p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" data-page="learn">Start learning <span>→</span></button>
+                <button class="btn btn-white" data-page="games"><span class="play-small">▶</span> Play a game</button>
+              </div>
+              <div class="hero-note"><span>✧</span> Your next big win is just one table away</div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="float-number n1">× 8</div><div class="float-number n2">7 × 6</div>
+              <div class="sunburst"></div><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+              <div class="hero-book">✕<small>LEARN</small></div><div class="hero-pencil">✎</div>
+              <span class="art-star star-one">✦</span><span class="art-star star-two">✧</span><span class="art-dot"></span>
+            </div>
+          </div>
+
+          <div class="section-heading welcome-row">
+            <div><h2>Your learning space <span class="heading-spark">✦</span></h2><p>A little practice today goes a long way.</p></div>
+            <label class="class-select-wrap">I’m in <select id="class-select" aria-label="Choose your class"></select></label>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card stat-purple"><div class="stat-icon">✦</div><div><span>Total stars</span><strong id="stat-stars">0</strong></div><span class="stat-decoration">✧</span></article>
+            <article class="stat-card stat-blue"><div class="stat-icon">▦</div><div><span>Tables mastered</span><strong id="stat-tables">0 <small>/ 100</small></strong></div><span class="stat-decoration">✧</span></article>
+            <article class="stat-card stat-orange"><div class="stat-icon">🔥</div><div><span>Day streak</span><strong id="stat-streak">0 <small>days</small></strong></div><span class="stat-decoration">✧</span></article>
+            <article class="stat-card stat-green"><div class="stat-icon">◒</div><div><span>Learning progress</span><strong id="stat-progress">0%</strong></div><div class="mini-progress"><i id="stat-progress-bar"></i></div></article>
+          </div>
+
+          <div class="home-grid">
+            <section class="panel table-of-day">
+              <div class="panel-head"><div><span class="panel-kicker">TODAY’S LITTLE CHALLENGE</span><h3>Table of the day <span>☀</span></h3></div><span class="day-badge">DAILY</span></div>
+              <div class="daily-content"><div class="daily-number" id="daily-number">7</div><div><h4>The table of <span id="daily-title">7</span></h4><p>Can you master this table today?</p><button class="text-link" id="daily-start">Let’s try it <span>→</span></button></div></div>
+              <div class="daily-footer"><span>✦ A new challenge every day</span><span id="daily-complete" class="daily-done"></span></div>
+            </section>
+            <section class="panel continue-card">
+              <div class="panel-head"><div><span class="panel-kicker">PICK UP WHERE YOU LEFT OFF</span><h3>Ready when you are</h3></div><span class="continue-icon">↗</span></div>
+              <p>Choose a table, find your rhythm, and watch your confidence grow.</p>
+              <div class="continue-controls"><label for="home-table">Table number</label><div class="input-button"><input type="number" id="home-table" min="1" max="100" value="7" aria-label="Table number"><button id="home-table-go">Go <span>→</span></button></div></div>
+              <button class="btn btn-soft" data-page="learn">Explore all tables <span>→</span></button>
+            </section>
+          </div>
+          <div class="bottom-row">
+            <section class="panel quick-panel"><div class="panel-head"><div><span class="panel-kicker">QUICK PLAY</span><h3>Pick your kind of fun</h3></div><button class="text-link" data-page="games">All games →</button></div><div class="quick-games">
+              <button class="game-tile tile-lilac" data-game="missing"><span>🧩</span><b>Missing number</b><small>Fill in the blank</small></button>
+              <button class="game-tile tile-peach" data-game="shooting"><span>🎯</span><b>Answer target</b><small>Pick the right one</small></button>
+              <button class="game-tile tile-mint" data-game="pairs"><span>🃏</span><b>Match the pairs</b><small>Find the matches</small></button>
+            </div></section>
+            <section class="panel progress-panel"><div class="panel-head"><div><span class="panel-kicker">YOUR WEEK</span><h3>Practice makes progress</h3></div><span class="week-label">This week</span></div><div class="week-chart" id="week-chart"></div></section>
+          </div>
+        </section>
+
+        <section class="page" id="page-learn">
+          <div class="page-intro"><div><div class="eyebrow">YOUR TABLE, YOUR PACE</div><h1>Let’s learn a <span>table!</span></h1><p>Pick any number from 1 to 100. There’s no wrong place to start.</p></div><div class="intro-illustration">✕<small>YOU’VE GOT THIS!</small></div></div>
+          <section class="panel table-picker"><div class="picker-top"><label for="table-search">Find a table</label><div class="search-box"><span>⌕</span><input id="table-search" type="search" placeholder="Search 1–100, e.g. 12" inputmode="numeric"><button id="search-table">Go</button></div><div class="class-hint" id="class-hint">Your class level goes up to table 5</div></div><div class="number-grid" id="number-grid"></div><button id="show-all-numbers" class="text-link show-all">Show all numbers <span>⌄</span></button></section>
+          <section class="panel lesson-panel" id="lesson-panel">
+            <div class="lesson-heading"><div><span class="panel-kicker">TABLE TIME</span><h2>The table of <strong id="lesson-table-number">7</strong></h2><p id="lesson-tip">Tap a line to reveal its answer. You’re doing great!</p></div><div class="lesson-controls">
+              <button id="prev-table" class="round-control" title="Previous table">←</button><button id="next-table" class="round-control" title="Next table">→</button>
+            </div></div>
+            <div class="lesson-toolbar"><div class="voice-controls"><button class="btn btn-voice" id="speak-table">🔊 <span>Read aloud</span></button><button class="icon-button voice-extra" id="pause-voice" title="Pause or resume speech">Ⅱ</button><button class="icon-button voice-extra" id="repeat-voice" title="Repeat table">↻</button><select id="voice-speed" aria-label="Voice speed"><option value="0.8">Slow</option><option value="1" selected>Normal</option><option value="1.3">Fast</option></select></div><button class="btn btn-outline" id="toggle-answers">Hide answers</button><button class="btn btn-outline" id="print-table">⎙ Print table</button></div>
+            <div class="table-lines" id="table-lines"></div>
+            <div class="lesson-bottom"><div class="tip-box"><span>💡</span><div><b>A little trick</b><p id="lesson-trick">Double the number, then double again!</p></div></div><div class="lesson-completion"><span id="lesson-status">Ready to practise?</span><button class="btn btn-primary" id="complete-lesson">I know this table! <span>✦</span></button></div></div>
+          </section>
+          <section class="panel worksheet-panel"><div><span class="worksheet-icon">✎</span><div><h3>Want to practise on paper?</h3><p>Make a printable worksheet with questions from this table.</p></div></div><button id="download-worksheet" class="btn btn-outline">Download worksheet ↓</button></section>
+        </section>
+
+        <section class="page" id="page-games">
+          <div class="page-intro"><div><div class="eyebrow">PLAY, LEARN, REPEAT</div><h1>Maths, but make it <span>play!</span></h1><p>Choose a game and give those multiplication muscles a workout.</p></div><div class="intro-illustration game-illustration">♙<small>GAME ON!</small></div></div>
+          <div class="game-catalog" id="game-catalog">
+            <button class="game-card game-lilac" data-game="missing"><span class="game-emoji">🧩</span><span class="game-tag">THINK IT THROUGH</span><h3>Missing number</h3><p>Spot the missing answer and fill in the blank.</p><b>Play game <span>→</span></b></button>
+            <button class="game-card game-peach" data-game="correct"><span class="game-emoji">✅</span><span class="game-tag">PICK THE WINNER</span><h3>Find the answer</h3><p>Four choices, one correct answer. Can you find it?</p><b>Play game <span>→</span></b></button>
+            <button class="game-card game-blue" data-game="speed"><span class="game-emoji">⚡</span><span class="game-tag">BEAT THE CLOCK</span><h3>Speed challenge</h3><p>How many answers can you get before time runs out?</p><b>Play game <span>→</span></b></button>
+            <button class="game-card game-mint" data-game="pairs"><span class="game-emoji">🃏</span><span class="game-tag">MAKE A MATCH</span><h3>Match the pairs</h3><p>Find the multiplication questions and matching answers.</p><b>Play game <span>→</span></b></button>
+            <button class="game-card game-yellow" data-game="shooting"><span class="game-emoji">🎯</span><span class="game-tag">AIM FOR THE ANSWER</span><h3>Answer target</h3><p>Choose the right target to score points and level up.</p><b>Play game <span>→</span></b></button>
+            <button class="game-card game-rose" data-game="blanks"><span class="game-emoji">✍️</span><span class="game-tag">COMPLETE THE PATTERN</span><h3>Fill in the blanks</h3><p>Complete a multiplication table one step at a time.</p><b>Play game <span>→</span></b></button>
+          </div>
+          <section class="panel game-stage hidden" id="game-stage"></section>
+        </section>
+
+        <section class="page" id="page-quiz">
+          <div class="page-intro"><div><div class="eyebrow">A LITTLE QUIZ, A LOT OF PROGRESS</div><h1>Show what you <span>know!</span></h1><p>Pick your level and see how much you’ve learned. You’ve got this!</p></div><div class="intro-illustration quiz-illustration">✎<small>QUIZ TIME!</small></div></div>
+          <section class="panel quiz-setup" id="quiz-setup"><span class="panel-kicker">CHOOSE YOUR CHALLENGE</span><h2>What feels right today?</h2><div class="difficulty-options"><button class="difficulty active" data-level="easy"><span>🌱</span><b>Easy</b><small>Tables 1–10</small><i>Nice and gentle</i></button><button class="difficulty" data-level="medium"><span>🚀</span><b>Medium</b><small>Tables 1–20</small><i>Ready for more?</i></button><button class="difficulty" data-level="hard"><span>🏆</span><b>Hard</b><small>Tables 1–100</small><i>Superstar mode</i></button></div><button id="start-quiz" class="btn btn-primary btn-large">Start my quiz <span>→</span></button><span class="quiz-length">10 questions · Multiple choice</span></section>
+          <section class="panel quiz-play hidden" id="quiz-play"><div class="quiz-progress-head"><span id="quiz-question-count">QUESTION 1 OF 10</span><span id="quiz-score-label">⭐ 0</span></div><div class="progress-track"><i id="quiz-progress-bar"></i></div><div class="quiz-question" id="quiz-question"></div><div class="quiz-options" id="quiz-options"></div><div class="quiz-feedback" id="quiz-feedback" aria-live="polite"></div><div class="quiz-next-wrap"><button id="quiz-next" class="btn btn-primary hidden">Next question →</button></div></section>
+          <section class="panel quiz-result hidden" id="quiz-result"></section>
+        </section>
+
+        <section class="page" id="page-magic">
+          <div class="page-intro"><div><div class="eyebrow">CLEVER SHORTCUTS INSIDE</div><h1>Maths has a little <span>magic.</span></h1><p>Discover easy tricks that make tricky tables feel simple.</p></div><div class="intro-illustration magic-illustration">✧<small>ABRACADABRA!</small></div></div>
+          <div class="tricks-grid">
+            <article class="trick-card trick-purple"><div class="trick-number">×2</div><div class="trick-badge">THE DOUBLER</div><h3>Two is double trouble</h3><p>To multiply by 2, just double the number. It’s the same as adding it to itself!</p><div class="trick-example">2 × 6 = 6 + 6 = <b>12</b></div><button data-trick-table="2" class="text-link">Try the 2 table →</button></article>
+            <article class="trick-card trick-blue"><div class="trick-number">×4</div><div class="trick-badge">DOUBLE TWICE</div><h3>Double, then double again</h3><p>Find the 4 table by doubling once for 2, then doubling your answer again.</p><div class="trick-example">4 × 3 → 6 → <b>12</b></div><button data-trick-table="4" class="text-link">Try the 4 table →</button></article>
+            <article class="trick-card trick-orange"><div class="trick-number">×5</div><div class="trick-badge">FIVE FINGERS</div><h3>Ends in 0 or 5</h3><p>Every answer in the 5 table ends in a 5 or a 0. Count by fives to find out!</p><div class="trick-example">5, 10, 15, 20, <b>25!</b></div><button data-trick-table="5" class="text-link">Try the 5 table →</button></article>
+            <article class="trick-card trick-green"><div class="trick-number">×9</div><div class="trick-badge">NINE'S NEAT TRICK</div><h3>Digits add up to 9</h3><p>In the 9 table, the digits in every answer add up to 9. Try 9 × 4 = 36: 3 + 6 = 9!</p><div class="trick-example">9 × 4 = 36 → 3 + 6 = <b>9</b></div><button data-trick-table="9" class="text-link">Try the 9 table →</button></article>
+            <article class="trick-card trick-pink"><div class="trick-number">×10</div><div class="trick-badge">ADD A ZERO</div><h3>Zero makes it easy</h3><p>To multiply by 10, just pop a zero at the end of the number. Easy peasy!</p><div class="trick-example">10 × 8 = 8 + 0 = <b>80</b></div><button data-trick-table="10" class="text-link">Try the 10 table →</button></article>
+            <article class="trick-card trick-yellow"><div class="trick-number">×11</div><div class="trick-badge">DOUBLE UP</div><h3>The repeating eleven</h3><p>For 11 × a number under 10, say that number twice. What a cool pattern!</p><div class="trick-example">11 × 7 = <b>77</b> · 11 × 3 = <b>33</b></div><button data-trick-table="11" class="text-link">Try the 11 table →</button></article>
+            <article class="trick-card trick-lilac"><div class="trick-number">×12</div><div class="trick-badge">A TEN AND A TWO</div><h3>Ten times, plus two times</h3><p>Split 12 into 10 + 2. Multiply each part, then add the answers together.</p><div class="trick-example">12 × 4 = 40 + 8 = <b>48</b></div><button data-trick-table="12" class="text-link">Try the 12 table →</button></article>
+          </div>
+        </section>
+
+        <section class="page" id="page-dashboard">
+          <div class="page-intro"><div><div class="eyebrow">LOOK HOW FAR YOU’VE COME</div><h1>Your progress, <span>your way.</span></h1><p>Every practice session is a step toward becoming a table master.</p></div><div class="intro-illustration progress-illustration">◷<small>KEEP GOING!</small></div></div>
+          <div class="dashboard-stats" id="dashboard-stats"></div>
+          <div class="dashboard-grid"><section class="panel dashboard-chart"><div class="panel-head"><div><span class="panel-kicker">YOUR PRACTICE</span><h3>A week of little wins</h3></div><span class="week-label">Last 7 days</span></div><div class="week-chart week-chart-large" id="dashboard-chart"></div></section>
+            <section class="panel recommendation"><span class="panel-kicker">UP NEXT FOR YOU</span><h3>Your next table is waiting</h3><p id="recommendation-text">A new table is ready for you to explore.</p><button id="recommendation-go" class="btn btn-primary">Learn next table <span>→</span></button></section></div>
+          <section class="panel history-panel"><div class="panel-head"><div><span class="panel-kicker">YOUR JOURNEY SO FAR</span><h3>Tables you’ve practised</h3></div><span class="history-count" id="history-count">0 tables</span></div><div id="completed-tables" class="completed-pills"></div><h3 class="subheading">Recent quiz scores</h3><div id="quiz-history" class="quiz-history"></div></section>
+          <section class="panel badge-panel"><div class="panel-head"><div><span class="panel-kicker">LITTLE MOMENTS, BIG ACHIEVEMENTS</span><h3>Your badges</h3></div><span>🏅</span></div><div id="badge-list" class="badge-list"></div></section>
+        </section>
+
+        <section class="page" id="page-parent">
+          <div class="page-intro"><div><div class="eyebrow">A LITTLE PEEK AT THEIR PROGRESS</div><h1>Parent <span>corner.</span></h1><p>Celebrate the effort, encourage the next step, and see what’s clicking.</p></div><div class="intro-illustration parent-illustration">♡<small>GREAT JOB!</small></div></div>
+          <section class="panel parent-overview"><div class="parent-student"><span class="parent-avatar" id="parent-avatar">S</span><div><span class="panel-kicker">LEARNER</span><h2 id="parent-name">Student</h2><p id="parent-class">Class 1 · Learning tables up to 5</p></div></div><div class="parent-metrics" id="parent-metrics"></div></section>
+          <div class="dashboard-grid"><section class="panel"><div class="panel-head"><div><span class="panel-kicker">ACTIVITY</span><h3>Practice this week</h3></div></div><div class="week-chart week-chart-large" id="parent-chart"></div></section><section class="panel parent-tip"><span class="panel-kicker">A GENTLE REMINDER</span><h3>Celebrate the trying.</h3><p>Encourage short, regular practice sessions. A little confidence can make a big difference.</p></section></div>
+          <section class="panel settings-panel"><div><span class="panel-kicker">PERSONALISE THE CLASSROOM</span><h3>Student details</h3><p>Change the name or class. Progress stays safely on this device.</p></div><div class="settings-form"><label>Student name<input id="student-name" type="text" maxlength="24" placeholder="What should we call you?"></label><label>Class<select id="parent-class-select"></select></label><button id="save-profile" class="btn btn-primary">Save details ✓</button></div></section>
+              <section class="panel sheets-setup-panel"><div><span class="panel-kicker">PARENT SETUP · GOOGLE SHEETS</span><h3>Cloud progress connection</h3><p>Set this up once. Students only need their name and 4-digit PIN when they sign in.</p></div><div class="sheets-url-form"><label>Apps Script web app URL<input id="apps-script-url" type="url" placeholder="https://script.google.com/macros/s/…/exec"></label><div class="sheets-url-actions"><button id="save-sheets-url" class="btn btn-primary">Save connection ✓</button><button id="test-sheets-url" class="btn btn-outline">Test connection</button></div></div><small id="sheets-connection-status" class="sheets-status"></small></section>
+          <section class="panel reset-panel"><div><h3>Start fresh?</h3><p>Reset removes saved progress, stars and quiz scores from this device.</p></div><button id="reset-progress" class="btn btn-danger">Reset progress</button></section>
+        </section>
+      </div>
+      <footer class="app-footer"><span>✦ Keep curious. Keep practising. Keep shining.</span><span>Table Master · Learn maths easily</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="modal-backdrop"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="modal-emoji">🌟</div><h2 id="modal-title"></h2><p id="modal-message"></p><button id="modal-action" class="btn btn-primary">Wonderful!</button></div></div>
+  <div class="modal-backdrop hidden" id="account-backdrop">
+    <section class="account-dialog" role="dialog" aria-modal="true" aria-labelledby="account-title">
+      <button class="modal-close" id="account-close" aria-label="Close">×</button>
+      <div class="account-mark">×</div>
+      <span class="panel-kicker">YOUR TABLE MASTER ACCOUNT</span>
+      <h2 id="account-title">Welcome back!</h2>
+      <p id="account-subtitle">Sign in to save your learning progress to Google Sheets.</p>
+      <form id="account-form">
+        <label>Student name<input id="account-name" type="text" maxlength="24" autocomplete="username" required></label>
+        <label>4-digit PIN<input id="account-pin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="current-password" required></label>
+        <p class="account-error" id="account-error" role="alert"></p>
+        <button class="btn btn-primary account-submit" id="account-submit" type="submit">Sign in securely <span>→</span></button>
+      </form>
+      <button id="account-switch" class="text-link account-switch">New student? Create an account</button>
+      <button id="account-parent-setup" class="text-link account-switch">Parent? Set up Google Sheets</button>
+      <div class="account-privacy">Your PIN is never sent in the web address. Ask a parent to help set up the Google Sheet connection.</div>
+    </section>
+  </div>
+  <iframe id="sheets-bridge" name="sheets-bridge" title="Google Sheets connection" class="bridge-frame" aria-hidden="true"></iframe>
+  <script src="script.js"></script>
+</body>
+</html>
