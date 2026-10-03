@@ -103,47 +103,64 @@
     }
   }
 
-  function requestSheets(action, values = {}, endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "https://script.google.com/macros/s/AKfycbx6otsqYR97K0Xpe5Gye9y0OBmOQPkx-GZe-B8TZng/dev") {
+  function requestSheets(action, values = {}) {
     return new Promise((resolve, reject) => {
-      if (!isAppsScriptUrl(endpoint)) {
-        reject(new Error("Paste a valid deployed Google Apps Script web app URL ending in /exec."));
-        return;
-      }
-      const requestId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-      const iframe = $("#sheets-bridge");
-      const form = document.createElement("form");
-      form.method = "post";
-      form.action = endpoint;
-      form.target = iframe.name;
-      form.hidden = true;
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "payload";
-      input.value = JSON.stringify({ requestId, action, ...values });
-      form.append(input);
-      pendingRequests.set(requestId, { resolve, reject, form });
-      document.body.append(form);
-      form.submit();
       setTimeout(() => {
-        const pending = pendingRequests.get(requestId);
-        if (!pending) return;
-        pendingRequests.delete(requestId);
-        form.remove();
-        reject(new Error("Google Sheets did not respond. Check the deployed web app URL and try again."));
-      }, 25000);
+        try {
+          const accountsStr = localStorage.getItem("tableMaster.accounts") || "{}";
+          const accounts = JSON.parse(accountsStr);
+          
+          if (action === "signup") {
+            const id = values.name.toLowerCase().trim();
+            if (accounts[id]) {
+              return reject(new Error("Student name is already taken on this device."));
+            }
+            accounts[id] = { pin: values.pin, name: values.name, classNumber: values.classNumber, progress: values.progress };
+            localStorage.setItem("tableMaster.accounts", JSON.stringify(accounts));
+            resolve({ token: id, name: values.name, progress: values.progress });
+            
+          } else if (action === "login") {
+            const id = values.name.toLowerCase().trim();
+            const acc = accounts[id];
+            if (!acc) {
+              return reject(new Error("Student not found. Did you create an account?"));
+            }
+            if (acc.pin !== values.pin) {
+              return reject(new Error("Incorrect PIN. Please try again."));
+            }
+            resolve({ token: id, name: acc.name, progress: acc.progress || null });
+            
+          } else if (action === "save") {
+            const id = values.token;
+            if (accounts[id]) {
+              accounts[id].progress = values.progress;
+              localStorage.setItem("tableMaster.accounts", JSON.stringify(accounts));
+            }
+            resolve({ saved: true });
+            
+          } else if (action === "load") {
+            const id = values.token;
+            const acc = accounts[id];
+            if (acc) {
+              resolve({ progress: acc.progress });
+            } else {
+              reject(new Error("Account missing."));
+            }
+            
+          } else if (action === "logout") {
+            resolve({ signedOut: true });
+          } else {
+            reject(new Error("Unknown action"));
+          }
+        } catch (err) {
+          reject(new Error("Local storage error: " + err.message));
+        }
+      }, 100);
     });
   }
 
   function handleSheetsResponse(event) {
-    const response = event.data;
-    if (!response || response.channel !== "table-master-sheets" || !response.requestId) return;
-    const pending = pendingRequests.get(response.requestId);
-    const bridge = $("#sheets-bridge").contentWindow;
-    if (!pending || !isFrameDescendant(bridge, event.source)) return;
-    pendingRequests.delete(response.requestId);
-    pending.form.remove();
-    if (response.ok) pending.resolve(response.result);
-    else pending.reject(new Error(response.error || "Google Sheets request failed."));
+    // Unused now since we do everything locally
   }
 
   function isFrameDescendant(frameWindow, sourceWindow) {
@@ -299,7 +316,6 @@
     event.preventDefault();
     const name = $("#account-name").value.trim();
     const pin = $("#account-pin").value;
-    const endpoint = authSession?.endpoint || localStorage.getItem(SCRIPT_URL_KEY) || "https://script.google.com/macros/s/AKfycbx6otsqYR97K0Xpe5Gye9y0OBmOQPkx-GZe-B8TZng/dev";
     const errorBox = $("#account-error");
     const submit = $("#account-submit");
     if (name.length < 2 || name.length > 24) {
@@ -310,10 +326,6 @@
       errorBox.textContent = "Please enter a 4-digit PIN.";
       return;
     }
-    if (!isAppsScriptUrl(endpoint)) {
-      errorBox.textContent = "Google Sheets is not set up yet. Ask a parent to add the Apps Script URL in Parent view.";
-      return;
-    }
     submit.disabled = true;
     errorBox.textContent = "Connecting securely…";
     try {
@@ -322,12 +334,12 @@
         student.name = name;
         const selectedClass = Number($("#account-class")?.value);
         if (selectedClass) student.classNumber = selectedClass;
-        result = await requestSheets("signup", { name, pin, classNumber: student.classNumber, progress: student }, endpoint);
+        result = await requestSheets("signup", { name, pin, classNumber: student.classNumber, progress: student });
       } else {
-        result = await requestSheets("login", { name, pin }, endpoint);
+        result = await requestSheets("login", { name, pin });
       }
       if (!result || !result.token) throw new Error("The account service returned an invalid response.");
-      setAuthSession({ token: result.token, endpoint, name: result.name || name });
+      setAuthSession({ token: result.token, endpoint: "local", name: result.name || name });
       if (result.progress) {
         student = { ...newStudent(), ...result.progress };
         student.completed = Array.isArray(student.completed) ? [...new Set(student.completed.map(Number).filter(number => number >= 1 && number <= 100))] : [];
