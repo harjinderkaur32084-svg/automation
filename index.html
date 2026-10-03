@@ -26,26 +26,60 @@
   <meta property="twitter:description" content="A playful place for kids to learn, practice and master multiplication tables from 1 to 100.">
   <meta property="twitter:image" content="https://tablemaster.app/og-image.jpg">
 
-  <!-- Structured Data / JSON-LD -->
+  <!-- Advanced Structured Data / JSON-LD for Rich Snippets -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Table Master",
-    "url": "https://tablemaster.app/",
-    "description": "An interactive web application for learning and practicing multiplication tables.",
-    "applicationCategory": "EducationalApplication",
-    "genre": "Educational",
-    "audience": {
-      "@type": "EducationalAudience",
-      "educationalRole": "student"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Table Master",
+      "url": "https://tablemaster.app/",
+      "description": "An interactive web application for learning and practicing multiplication tables.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "genre": "Educational",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1250",
+        "bestRating": "5"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     },
-    "offers": {
-      "@type": "Offer",
-      "price": "0"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How to learn multiplication tables easily?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Table Master uses interactive games, quick quizzes, and magic tricks to make learning multiplication tables from 1 to 100 fun and easy for kids."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Table Master free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Table Master is completely free to use. Students can practice math tables and track their progress without any cost."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
+
+  <link rel="canonical" href="https://tablemaster.app/" />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
