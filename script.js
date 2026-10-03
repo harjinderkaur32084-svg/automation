@@ -34,7 +34,7 @@
       const url = new URL(value);
       return url.protocol === "https:" &&
         url.hostname === "script.google.com" &&
-        /^\/(?:macros\/(?:u\/\d+\/)?|a\/macros\/[a-z0-9.-]+\/)s\/[^/]+\/exec\/?$/.test(url.pathname);
+        /^\/(?:macros\/(?:u\/\d+\/)?|a\/macros\/[a-z0-9.-]+\/)s\/[^/]+\/(?:exec|dev)\/?$/.test(url.pathname);
     } catch {
       return false;
     }
